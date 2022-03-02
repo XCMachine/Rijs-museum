@@ -2,4 +2,4 @@
  
 This is a Rijs Museum project from a local machine.
 
-test
+Added the Android Project through master branch, then merged with dev.
