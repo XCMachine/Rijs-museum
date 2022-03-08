@@ -11,7 +11,7 @@ data class CollectionsDetails(
         val title: String?,
         //copyrightHolder = null
 
-        val color: List<colors>,
+        val colors: List<color>,
         val colorsWithNormalization: List<colorsWithNormal>,
         val normalizedColors: List<normalColors>,
         val normalized32Colors: List<normal32Colors>,
@@ -67,7 +67,7 @@ data class CollectionsDetails(
             val url: String?
         )
 
-        data class colors(
+        data class color(
             val percentage: Int,
             val hex: String?
         )
