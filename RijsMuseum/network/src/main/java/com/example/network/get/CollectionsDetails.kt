@@ -17,7 +17,7 @@ data class CollectionsDetails(
         val normalized32Colors: List<normal32Colors>,
 
         val titles: String?,
-        val descriptions: String?,
+        val description: String?,
         //labelText = null
         val objectTypes: List<String> = emptyList(),
         val objectCollection: List<String> = emptyList(),
