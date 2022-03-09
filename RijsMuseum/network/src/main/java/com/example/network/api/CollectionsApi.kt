@@ -1,11 +1,10 @@
 package com.example.network.api
 
-import com.example.network.get.Collections
-import com.example.network.get.CollectionsDetails
+import com.example.network.models.Collections
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface RijsMuseumApi {
+interface CollectionsApi {
     //Base URL: https://www.rijksmuseum.nl
 
     //Gets the collections api
