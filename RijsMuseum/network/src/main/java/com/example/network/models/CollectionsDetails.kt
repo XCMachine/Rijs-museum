@@ -1,4 +1,4 @@
-package com.example.network.get
+package com.example.network.models
 
 data class CollectionsDetails(
     val elapsedMilliseconds: Int,
