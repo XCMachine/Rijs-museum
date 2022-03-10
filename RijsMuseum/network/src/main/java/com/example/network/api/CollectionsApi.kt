@@ -12,7 +12,7 @@ interface CollectionsApi {
     fun getCollections(
         @Path("culture") culture: String,
         @Query("format") format: String = "json",
-        @Query("p") p: String = "0",
-        @Query("ps") ps: String = "10"
+        @Query("p") page: String = "0",
+        @Query("ps") pages: String = "10"
     ): Call<List<Collections>>
 }
