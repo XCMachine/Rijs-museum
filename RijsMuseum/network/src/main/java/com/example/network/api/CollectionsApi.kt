@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface CollectionsApi {
     //Gets the collections api
-    @GET("/api/{culture}/collection/SK-C-5?key=Z8ZQgAb8&format=json&culture=en&p=0&ps=10")
+    @GET("/api/{culture}/collection/SK-C-5?key=Z8ZQgAb8")
     fun getCollections(
         @Path("culture") culture: String,
         @Query("format") format: String = "json",
