@@ -1,5 +1,6 @@
 package com.example.network.getters
 
+import android.util.Log
 import com.example.network.api.CollectionsApi
 import com.example.network.models.Collections
 import retrofit2.Call
