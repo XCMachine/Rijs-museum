@@ -2,8 +2,12 @@ package com.example.network.models
 
 data class CollectionsDetails(
     val elapsedMilliseconds: Int,
+    val artObject: ArtObject
 ) {
-    data class artObject(
+
+    data class ArtObject(
+        val links: Links,
+
         val id: String?,
         val priref: String?,
         val objectNumber: String?,
@@ -11,10 +15,12 @@ data class CollectionsDetails(
         val title: String?,
         //copyrightHolder = null
 
-        val colors: List<color>,
-        val colorsWithNormalization: List<colorsWithNormal>,
-        val normalizedColors: List<normalColors>,
-        val normalized32Colors: List<normal32Colors>,
+        val webImage: WebImage,
+
+        val colors: List<Colors>,
+        val colorsWithNormalization: List<ColorsWithNormal>,
+        val normalizedColors: List<NormalColors>,
+        val normalized32Colors: List<Normal32Colors>,
 
         val titles: String?,
         val description: String?,
@@ -23,7 +29,7 @@ data class CollectionsDetails(
         val objectCollection: List<String> = emptyList(),
         val makers: List<String> = emptyList(),
 
-        val principalMakers: List<principalMake>,
+        val principalMakers: List<PrincipalMakers>,
 
         val plaqueDescriptionDutch: String?,
         val plaqueDescriptionEnglish: String?,
@@ -31,10 +37,16 @@ data class CollectionsDetails(
         //artistRole = null
         val associations: List<String> = emptyList(),
 
+        val acquisition: Acquisition,
+
         val exhibitions: List<String> = emptyList(),
         val materials: List<String> = emptyList(),
         val techniques: List<String> = emptyList(),
         val productionPlaces: List<String> = emptyList(),
+
+        val dating: Dating,
+
+        val classification: Classification,
 
         val hasImage: Boolean,
         val historicalPersons: List<String> = emptyList(),
@@ -42,7 +54,7 @@ data class CollectionsDetails(
         val documentation: List<String> = emptyList(),
         val catRefRPK: List<String> = emptyList(),
         val principalOrFirstMaker: String?,
-        val dimensions: List<Dimension>,
+        val dimensions: List<Dimensions>,
 
         val physicalProperties: List<String> = emptyList(),
         val physicalMedium: String?,
@@ -54,11 +66,11 @@ data class CollectionsDetails(
         val showImage: Boolean,
         val location: String?
     ) {
-        data class links(
+        data class Links(
             val search: String?
         )
 
-        data class webImage(
+        data class WebImage(
             val guid: String?,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
@@ -67,27 +79,27 @@ data class CollectionsDetails(
             val url: String?
         )
 
-        data class color(
+        data class Colors(
             val percentage: Int,
             val hex: String?
         )
 
-        data class colorsWithNormal(
+        data class ColorsWithNormal(
             val originalHex: String?,
             val normalizeHex: String?
         )
 
-        data class normalColors(
+        data class NormalColors(
             val percentage: Int,
             val hex: String?
         )
 
-        data class normal32Colors(
+        data class Normal32Colors(
             val percentage: Int,
             val hex: String?
         )
 
-        data class principalMake(
+        data class PrincipalMakers(
             val name: String?,
             val unFixedName: String?,
             val placeOfBirth: String?,
@@ -104,13 +116,13 @@ data class CollectionsDetails(
             //qualification = null
         )
 
-        data class acquisition(
+        data class Acquisition(
             val method: String?,
             val date: String?,
             val creditLine: String?
         )
 
-        data class dating(
+        data class Dating(
             val presentingDate: String?,
             val sortingDate: Int,
             val period: Int,
@@ -118,11 +130,11 @@ data class CollectionsDetails(
             val yearLate: Int
         )
 
-        data class classification(
+        data class Classification(
             val iconClassIdentifier: List<String> = emptyList()
         )
 
-        data class Dimension(
+        data class Dimensions(
             val unit: String?,
             val type: String?,
             //part = null,
