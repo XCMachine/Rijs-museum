@@ -9,6 +9,8 @@ data class Collections(
         /**
          * Attributes as variables
          */
+        val links: Links,
+
         val id: String?,
         val objectNumber: String?,
         val title: String?,
@@ -17,6 +19,10 @@ data class Collections(
         val longTitle: String?,
         val showImage: Boolean,
         val permitDownload: Boolean,
+
+        val webImage: WebImage,
+        val headerImage: HeaderImage,
+
         val productionPlaces: List<String> = emptyList()
     ) {
         /**
@@ -27,7 +33,7 @@ data class Collections(
             val web: String? = null
         )
 
-        data class webImage(
+        data class WebImage(
             val guid: String,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
@@ -36,7 +42,7 @@ data class Collections(
             val url: String
         )
 
-        data class headerImage(
+        data class HeaderImage(
             val guid: String,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
