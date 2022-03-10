@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.network.getters
 
 import com.example.network.api.CollectionsApi
 import com.example.network.models.Collections
@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Network {
+class CollectionsGetter {
     private var collectionsList: List<Collections>? = null
     
     private val baseURL = "https://www.rijksmuseum.nl"
@@ -23,7 +23,7 @@ class Network {
         val collectionsApi = retrofit.create(CollectionsApi::class.java)
 
         //Collections model call and callback
-        val callCollections: Call<List<Collections>> = collectionsApi.getCollections("en", "json", "0", "10")
+        val callCollections: Call<List<Collections>> = collectionsApi.getCollections(culture = "en", page = "0", pages = "10")
         callCollections.enqueue(object : Callback<List<Collections>> {
             override fun onResponse(
                 call: Call<List<Collections>>,
@@ -33,11 +33,7 @@ class Network {
             }
 
             override fun onFailure(call: Call<List<Collections>>, t: Throwable) {
-                if (call.isCanceled) {
-                    t.message
-                    t.printStackTrace()
-                    call.cancel()
-                }
+                Log.e("Error", t.localizedMessage!!)
             }
         })
     }
