@@ -51,12 +51,4 @@ data class Collections(
             val url: String
         )
     }
-
-    /*Example for a List,arrayList or Array of data class
-    var principalMakers: List<PrincipalMaker>
-
-    data class PrincipalMaker(
-
-    )
-     */
 }
