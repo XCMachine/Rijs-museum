@@ -9,18 +9,23 @@ import retrofit2.http.Query
 
 interface CollectionsApi {
     //Gets the collections api
-    @GET("/api/{culture}/collection?key=Z8ZQgAb8&involvedMaker=Rembrandt+van+Rijn")
+    @GET("/api/{culture}/collection")
     fun getCollections(
         @Path("culture") culture: String,
         @Query("format") format: String = "json",
         @Query("p") page: String = "0",
-        @Query("ps") pages: String = "10"
-    ): Call<List<Collections>>
+        @Query("ps") pages: String = "10",
+        @Query("key") key: String = KEY
+    ): Call<Collections>
 
     //GEts the collections details api
-    @GET("/api/{culture}/collection/SK-C-5?key=Z8ZQgAb8")
+    @GET("/api/{culture}/collection/{objectNumber}")
     fun getCollectionsDetails(
         @Path("culture") culture: String,
-        @Query("format") format: String
-    ): Call<List<CollectionsDetails>>
+        @Path("objectNumber") objectNumber: String,
+        @Query("format") format: String,
+        @Query("key") key: String = KEY
+    ): Call<CollectionsDetails>
 }
+
+const val KEY = "Z8ZQgAb8"
