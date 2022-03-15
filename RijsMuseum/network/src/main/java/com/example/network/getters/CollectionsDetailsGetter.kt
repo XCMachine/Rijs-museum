@@ -9,23 +9,23 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CollectionsDetailsGetter {
-    private var collectionsDetailsList: List<CollectionsDetails>? = null
+    private var collectionsDetailsList: CollectionsDetails? = null
 
     fun getCollectionsDetailsRequest() {
         val collectionsDetailsApi = Retrofit().builder.create(CollectionsApi::class.java)
 
         //CollectionsDetails model call and callback
-        val callCollections: Call<List<CollectionsDetails>> = collectionsDetailsApi.getCollectionsDetails(culture = "en", format = "json")
+        val callCollections: Call<CollectionsDetails> = collectionsDetailsApi.getCollectionsDetails(culture = "en", objectNumber = "SK-C-5", format = "json")
 
-        callCollections.enqueue(object : Callback<List<CollectionsDetails>> {
+        callCollections.enqueue(object : Callback<CollectionsDetails> {
             override fun onResponse(
-                call: Call<List<CollectionsDetails>>,
-                response: Response<List<CollectionsDetails>>
+                call: Call<CollectionsDetails>,
+                response: Response<CollectionsDetails>
             ) {
                 collectionsDetailsList = response.body()
             }
 
-            override fun onFailure(call: Call<List<CollectionsDetails>>, t: Throwable) {
+            override fun onFailure(call: Call<CollectionsDetails>, t: Throwable) {
                 Log.e("Error", t.localizedMessage!!)
             }
 
