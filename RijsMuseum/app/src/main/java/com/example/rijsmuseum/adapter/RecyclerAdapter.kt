@@ -13,6 +13,8 @@ import com.example.rijsmuseum.R
 class RecyclerAdapter(listItems: List<Collections>, var context: Context) : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
     private var exampleList: List<Collections> = listItems
 
+    private var titles: String? = null
+
     private var mListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
