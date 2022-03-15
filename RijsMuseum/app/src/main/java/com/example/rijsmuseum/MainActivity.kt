@@ -31,15 +31,17 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
             }
         }
 
+        //THIS NEEDS TO BE IN THE GETTER CLASS
         adapter = RecyclerAdapter(viewModel!!.exampleList!!, this)
         recyclerView.adapter = adapter
+        adapter.setOnItemClickListener(this)
     }
 
     //This is for selected artifact.
     override fun onItemClick(position: Int) {
         viewModel?.let {
             //not used yet
-            val clickedItem = it.exampleList!![position]
+            //val clickedItem = it.exampleList!![position]
         }
     }
 }
