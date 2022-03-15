@@ -9,8 +9,14 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+*/build/*
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+/network/build/intermediates/aar_metadata/debug/aar-metadata.properties
+/network/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+/network/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+/network/build/intermediates/incremental/mergeDebugShaders/merger.xml
+/network/build/intermediates/incremental/packageDebugAssets/merger.xml
+/network/build/intermediates/navigation_json/debug/navigation.json
