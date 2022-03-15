@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: RecyclerAdapter
+    private var adapter: RecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +27,17 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //THIS NEEDS TO BE IN THE GETTER CLASS
+        getRequestButton.setOnClickListener {
+            viewModel.getCollectionsRequest()
+        }
+
+        //Adapter settings from the ViewModel
         adapter = RecyclerAdapter(viewModel.exampleList, this)
-        recyclerView.adapter = adapter
-        adapter.setOnItemClickListener(this)
-        viewModel.getCollectionsRequest()
+        viewModel.adapterSettings(
+            adapter = adapter!!,
+            recyclerView = recyclerView,
+            listener = this
+        )
     }
 
     //This is for selected artifact.
