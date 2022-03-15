@@ -1,7 +1,6 @@
 package com.example.rijsmuseum
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +9,7 @@ import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
-    private lateinit var getRequestButton: Button
+    //private lateinit var getRequestButton: Button
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var viewModel: MainViewModel
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getRequestButton = findViewById(R.id.getRequestButton)
+        //getRequestButton = findViewById(R.id.getRequestButton)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -27,9 +26,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        getRequestButton.setOnClickListener {
-            viewModel.getCollectionsRequest()
-        }
+        viewModel.getCollectionsRequest()
 
         //Adapter settings from the ViewModel
         adapter = RecyclerAdapter(viewModel.exampleList, this)
