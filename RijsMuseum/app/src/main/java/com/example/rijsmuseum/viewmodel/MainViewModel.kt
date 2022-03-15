@@ -6,7 +6,7 @@ import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 
 class MainViewModel: ViewModel() {
-    var exampleList: List<Collections>? = null
+    val exampleList: List<Collections> = listOf()
 
     fun getCollectionsRequest() {
         CollectionsGetter().getCollectionRequest()
