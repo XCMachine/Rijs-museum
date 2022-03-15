@@ -11,7 +11,7 @@ import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
 class RecyclerAdapter(listItems: List<Collections>, var context: Context) : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
-    private var exampleList: ArrayList<Collections> = listItems as ArrayList<Collections>
+    private var exampleList: List<Collections> = listItems
 
     private var mListener: OnItemClickListener? = null
 
@@ -51,7 +51,7 @@ class RecyclerAdapter(listItems: List<Collections>, var context: Context) : Recy
     }
 
     init {
-        exampleList = listItems as ArrayList<Collections>
+        exampleList = listItems
     }
 
 }
