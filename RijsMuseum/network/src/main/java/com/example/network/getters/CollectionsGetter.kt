@@ -11,7 +11,8 @@ import retrofit2.Response
 class CollectionsGetter {
     private var collectionsList: List<Collections>? = null
 
-    fun getCollectionRequest() {
+    fun getCollectionRequest(itemsList: List<Collections>?) {
+        this.collectionsList = itemsList
         val collectionsApi = Retrofit().builder.create(CollectionsApi::class.java)
 
         //Collections model call and callback
