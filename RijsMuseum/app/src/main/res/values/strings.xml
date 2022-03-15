@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RijsMuseum</string>
+    <string name="sample_text">sample_text</string>
+    <string name="press">Press</string>
 </resources>
