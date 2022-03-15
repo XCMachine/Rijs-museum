@@ -11,12 +11,12 @@ data class Collections(
          */
         val links: Links,
 
-        val id: String?,
-        val objectNumber: String?,
-        val title: String?,
+        val id: String,
+        val objectNumber: String,
+        val title: String,
         val hasImage: Boolean,
-        val principalOrFirstMaker: String?,
-        val longTitle: String?,
+        val principalOrFirstMaker: String,
+        val longTitle: String,
         val showImage: Boolean,
         val permitDownload: Boolean,
 
@@ -29,8 +29,8 @@ data class Collections(
          * Classes
          */
         data class Links(
-            val self: String? = null,
-            val web: String? = null
+            val self: String,
+            val web: String
         )
 
         data class WebImage(
