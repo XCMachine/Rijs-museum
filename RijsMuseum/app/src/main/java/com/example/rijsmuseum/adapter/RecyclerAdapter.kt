@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
+import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
 class RecyclerAdapter(listItems: List<Collections>, var context: Context) : RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
@@ -17,17 +18,18 @@ class RecyclerAdapter(listItems: List<Collections>, var context: Context) : Recy
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
+    fun setOnItemClickListener(listener: MainActivity) {
+        mListener = listener
+    }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RecyclerAdapter.RecyclerViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.card_items, parent, false)
-        return RecyclerViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.RecyclerViewHolder {
+        val viewInflater = LayoutInflater.from(context).inflate(R.layout.card_items, parent, false)
+        return RecyclerViewHolder(viewInflater)
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.RecyclerViewHolder, position: Int) {
         val listItem = exampleList[position]
+
         holder.titleText.text = listItem.artObjects[3].toString()
     }
 
