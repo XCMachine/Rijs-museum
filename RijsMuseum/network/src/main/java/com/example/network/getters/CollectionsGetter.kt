@@ -2,7 +2,7 @@ package com.example.network.getters
 
 import android.util.Log
 import com.example.network.Retrofit
-import com.example.network.api.CollectionsApi
+import com.example.network.api.CollectionsApiService
 import com.example.network.models.Collections
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,10 +12,10 @@ class CollectionsGetter {
     private var collectionsList: Collections? = null
 
     fun getCollectionRequest() {
-        val collectionsApi = Retrofit().builder.create(CollectionsApi::class.java)
+        val collectionsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //Collections model call and callback
-        val callCollections: Call<Collections> = collectionsApi.getCollections(culture = "en", page = "0", pages = "10")
+        val callCollections: Call<Collections> = collectionsApi.getCollectionsList(culture = "en", page = "0", pages = "10")
         callCollections.enqueue(object : Callback<Collections> {
             override fun onResponse(
                 call: Call<Collections>,
