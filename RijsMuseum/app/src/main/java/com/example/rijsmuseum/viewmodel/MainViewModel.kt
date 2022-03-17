@@ -6,21 +6,15 @@ import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 
 class MainViewModel: ViewModel() {
-    var exampleList: MutableList<Collections> = mutableListOf()
+    var artObjects: MutableList<Collections.ArtObject> = mutableListOf()
 
-    init {
-        exampleList = mutableListOf()
-    }
-
-    fun getCollectionsObserver(): MutableList<Collections> {
-        return exampleList
-    }
-
-    fun getCollectionsRequest() {
-        CollectionsGetter().getCollectionRequest()
+    fun getCollectionsRequest(callback: CollectionsGetter.DataReadyCallback) {
+        CollectionsGetter().getCollectionRequest(callback)
     }
 
     fun getCollectionsDetailsRequest() {
         CollectionsDetailsGetter().getCollectionsDetailsRequest()
     }
+
+
 }
