@@ -9,20 +9,22 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CollectionsDetailsGetter {
-    private var collectionsDetailsList: CollectionsDetails? = null
 
-    fun getCollectionsDetailsRequest() {
+    fun getCollectionsDetailsRequest(
+        callback: DataReadyCallback
+    ) {
         val collectionsDetailsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //CollectionsDetails model call and callback
         val callCollections: Call<CollectionsDetails> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", objectNumber = "SK-C-5", format = "json")
-
         callCollections.enqueue(object : Callback<CollectionsDetails> {
             override fun onResponse(
                 call: Call<CollectionsDetails>,
                 response: Response<CollectionsDetails>
             ) {
-                collectionsDetailsList = response.body()
+                response.body()?.run {
+                    callback.onDataReady(this.artObject)
+                }
             }
 
             override fun onFailure(call: Call<CollectionsDetails>, t: Throwable) {
@@ -30,5 +32,9 @@ class CollectionsDetailsGetter {
             }
 
         })
+    }
+
+    interface DataReadyCallback {
+        fun onDataReady(data: List<CollectionsDetails.ArtObject>)
     }
 }
