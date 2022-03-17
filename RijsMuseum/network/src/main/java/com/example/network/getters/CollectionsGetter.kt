@@ -9,9 +9,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CollectionsGetter {
-    private var collectionsList: Collections? = null
 
-    fun getCollectionRequest() {
+    fun getCollectionRequest(
+        callback: DataReadyCallback
+    ) {
         val collectionsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //Collections model call and callback
@@ -21,12 +22,18 @@ class CollectionsGetter {
                 call: Call<Collections>,
                 response: Response<Collections>
             ) {
-                collectionsList = response.body()
+                response.body()?.run {
+                    callback.onDataReady(this.artObjects)
+                }
             }
 
             override fun onFailure(call: Call<Collections>, t: Throwable) {
                 Log.e("Error", t.localizedMessage!!)
             }
         })
+    }
+
+    interface DataReadyCallback{
+        fun onDataReady(data: List<Collections.ArtObject>)
     }
 }
