@@ -8,6 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Retrofit {
     fun getCollectionsInstance(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         return Retrofit.Builder()
