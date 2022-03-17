@@ -9,8 +9,8 @@ import com.example.network.models.Collections
 import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
-class RecyclerAdapter(listItems: List<Collections>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-    private var exampleList: ArrayList<Collections> = listItems as ArrayList<Collections>
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+    private val list: MutableList<Collections.ArtObject> = mutableListOf()
 
     private var mListener: OnItemClickListener? = null
 
@@ -27,24 +27,23 @@ class RecyclerAdapter(listItems: List<Collections>) : RecyclerView.Adapter<Recyc
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(exampleList[position], position)
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
-        return exampleList.size
+        return list.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        lateinit var titleText: TextView
+        private var titleText: TextView = itemView.findViewById(R.id.titleText)
 
-        fun bind(data: Collections, position: Int) {
-            titleText.text = data.artObjects[position].title
+        fun bind(data: Collections.ArtObject) {
+            titleText.text = data.title
         }
 
         init {
             //Setting the new interface listener here, using it's position parameter
             itemView.setOnClickListener {
-                titleText = itemView.findViewById(R.id.titleText)
                 if (mListener != null) {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
@@ -55,7 +54,9 @@ class RecyclerAdapter(listItems: List<Collections>) : RecyclerView.Adapter<Recyc
         }
     }
 
-    init {
-        exampleList = listItems as ArrayList<Collections>
+    fun updateData(listItems: List<Collections.ArtObject>) {
+        list.clear()
+        list.addAll(listItems)
+        notifyDataSetChanged()
     }
 }
