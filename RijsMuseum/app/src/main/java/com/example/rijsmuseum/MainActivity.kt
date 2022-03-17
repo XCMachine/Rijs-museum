@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.network.getters.CollectionsGetter
+import com.example.network.models.Collections
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.viewmodel.MainViewModel
 
@@ -20,26 +22,28 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //getRequestButton = findViewById(R.id.getRequestButton)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.hasFixedSize()
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getCollectionsObserver()
 
         adapterSettings()
 
         getRequestButton = findViewById(R.id.getButton)
         getRequestButton.setOnClickListener {
-            viewModel.getCollectionsRequest()
+            viewModel.getCollectionsRequest(object : CollectionsGetter.DataReadyCallback {
+                override fun onDataReady(data: List<Collections.ArtObject>) {
+                    adapter.updateData(data)
+                }
+            })
+            viewModel.artObjects
         }
     }
 
     private fun adapterSettings() {
-        adapter = RecyclerAdapter(viewModel.exampleList)
+        adapter = RecyclerAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(this)
