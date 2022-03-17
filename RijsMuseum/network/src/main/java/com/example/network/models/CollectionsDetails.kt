@@ -2,7 +2,7 @@ package com.example.network.models
 
 data class CollectionsDetails(
     val elapsedMilliseconds: Int,
-    val artObject: ArtObject
+    val artObject: List<ArtObject>
 ) {
 
     data class ArtObject(
