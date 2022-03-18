@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.network.getters.CollectionsDetailsGetter
 import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 import com.example.network.models.CollectionsDetails
@@ -44,7 +43,6 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
                     adapter.updateCollectionsData(data)
                 }
             })
-            viewModel.artObjects
         }
     }
 
@@ -55,20 +53,12 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         adapter.setOnItemClickListener(this)
     }
 
-    //This is for selected artifact.
-    override fun onItemClick(position: Int) {
-        viewModel.artObjectsDetails.let {
-            viewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
-                override fun onDataReady(data: CollectionsDetails.ArtObject) {
-                    adapter.updateCollectionsDetailsData(data)
-                }
-            })
-
-            supportFragmentManager.beginTransaction().apply {
-                flFragment.visibility = View.VISIBLE
-                replace(R.id.flFragmentDetails, CollectionsDetailsFragment())
-                commit()
-            }
+    override fun onItemClick(cDetailsArtObject: CollectionsDetails.ArtObject, position: Int) {
+        supportFragmentManager.beginTransaction().apply {
+            //Opens the fragment FrameLayout window
+            flFragment.visibility = View.VISIBLE
+            replace(R.id.flFragmentDetails, CollectionsDetailsFragment())
+            commit()
         }
     }
 }
