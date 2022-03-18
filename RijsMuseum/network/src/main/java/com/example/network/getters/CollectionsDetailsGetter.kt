@@ -35,6 +35,6 @@ class CollectionsDetailsGetter {
     }
 
     interface DataReadyCallback {
-        fun onDataReady(data: List<CollectionsDetails.ArtObject>)
+        fun onDataReady(data: CollectionsDetails.ArtObject)
     }
 }
