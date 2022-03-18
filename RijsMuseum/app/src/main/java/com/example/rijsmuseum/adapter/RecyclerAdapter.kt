@@ -4,19 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
-import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
     private val cList: MutableList<Collections.ArtObject> = mutableListOf()
-    //CollectionsDetails ArtObjects
-    //unused yet
-    private val cDetailsObject: MutableLiveData<CollectionsDetails.ArtObject>? = null
 
     private var mListener: OnItemClickListener? = null
 
@@ -64,9 +59,5 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         cList.clear()
         cList.addAll(listItems)
         notifyDataSetChanged()
-    }
-
-    fun updateCollectionsDetailsData(item: CollectionsDetails.ArtObject) {
-        item.title
     }
 }
