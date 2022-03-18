@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.network.getters.CollectionsDetailsGetter
+import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
@@ -17,6 +19,13 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
+            override fun onDataReady(data: CollectionsDetails.ArtObject) {
+                titleText.text = data.title
+            }
+
+        })
     }
 
     override fun onCreateView(
