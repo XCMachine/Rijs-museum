@@ -19,13 +19,7 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
-            override fun onDataReady(data: CollectionsDetails.ArtObject) {
-                titleText.text = data.title
-            }
-
-        })
+        detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -38,6 +32,12 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleText = view.findViewById(R.id.fragmentTitle)
-        detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+
+        detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
+            override fun onDataReady(data: CollectionsDetails.ArtObject) {
+                titleText.text = data.title
+            }
+
+        })
     }
 }
