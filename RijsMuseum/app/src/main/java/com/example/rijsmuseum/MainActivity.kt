@@ -1,19 +1,25 @@
 package com.example.rijsmuseum
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.network.getters.CollectionsDetailsGetter
 import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
+import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.adapter.RecyclerAdapter
+import com.example.rijsmuseum.fragments.CollectionsDetailsFragment
 import com.example.rijsmuseum.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     private lateinit var getRequestButton: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var flFragment: FrameLayout
 
     private lateinit var viewModel: MainViewModel
 
@@ -26,16 +32,16 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         recyclerView = findViewById(R.id.recyclerView)
-
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        flFragment = findViewById(R.id.flFragmentDetails)
 
         adapterSettings()
 
+        //Button to get the list of artifacts
         getRequestButton = findViewById(R.id.getButton)
         getRequestButton.setOnClickListener {
             viewModel.getCollectionsRequest(object : CollectionsGetter.DataReadyCallback {
                 override fun onDataReady(data: List<Collections.ArtObject>) {
-                    adapter.updateData(data)
+                    adapter.updateCollectionsData(data)
                 }
             })
             viewModel.artObjects
@@ -51,9 +57,18 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     //This is for selected artifact.
     override fun onItemClick(position: Int) {
-        viewModel.let {
-            //It's commented because it won't be used yet, need to display the list first.
-            //val clickedItem = it.exampleList!![position]
+        viewModel.artObjectsDetails.let {
+            viewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
+                override fun onDataReady(data: CollectionsDetails.ArtObject) {
+                    adapter.updateCollectionsDetailsData(data)
+                }
+            })
+
+            supportFragmentManager.beginTransaction().apply {
+                flFragment.visibility = View.VISIBLE
+                replace(R.id.flFragmentDetails, CollectionsDetailsFragment())
+                commit()
+            }
         }
     }
 }
