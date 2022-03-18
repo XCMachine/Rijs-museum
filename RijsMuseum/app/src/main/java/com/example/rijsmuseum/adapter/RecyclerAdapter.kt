@@ -6,17 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
+import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
     private val cList: MutableList<Collections.ArtObject> = mutableListOf()
+    private val cDetailsArtObject: CollectionsDetails.ArtObject? = null
 
     private var mListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(cDetailsArtObject: CollectionsDetails.ArtObject, position: Int)
     }
     fun setOnItemClickListener(listener: MainActivity) {
         mListener = listener
@@ -46,9 +48,8 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             //Setting the new interface listener here, using it's position parameter
             itemView.setOnClickListener {
                 if (mListener != null) {
-                    val position = adapterPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        mListener!!.onItemClick(position)
+                    if (cDetailsArtObject != null) {
+                        mListener!!.onItemClick(cDetailsArtObject, adapterPosition)
                     }
                 }
             }
