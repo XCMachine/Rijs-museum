@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
-import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.fragments.DetailsFragment
 import com.example.rijsmuseum.viewmodel.MainViewModel
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         adapter.setOnItemClickListener(this)
     }
 
-    override fun onItemClick(cDetailsArtObject: CollectionsDetails.ArtObject, position: Int) {
+    override fun onItemClick(cDetailsArtObject: Collections.ArtObject) {
         supportFragmentManager.beginTransaction().apply {
             //Opens the fragment FrameLayout window
             flFragment.visibility = View.VISIBLE
