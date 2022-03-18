@@ -22,7 +22,7 @@ data class CollectionsDetails(
         val normalizedColors: List<NormalColors>,
         val normalized32Colors: List<Normal32Colors>,
 
-        val titles: String,
+        val titles: List<String>,
         val description: String,
         //labelText = null
         val objectTypes: List<String> = emptyList(),
@@ -61,7 +61,7 @@ data class CollectionsDetails(
         val longTitle: String,
         val subTitle: String,
         val scLabelLine: String,
-        val label: List<Label>,
+        val label: Label,
 
         val showImage: Boolean,
         val location: String
