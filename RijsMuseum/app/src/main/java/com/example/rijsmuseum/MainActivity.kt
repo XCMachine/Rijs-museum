@@ -12,7 +12,7 @@ import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.adapter.RecyclerAdapter
-import com.example.rijsmuseum.fragments.CollectionsDetailsFragment
+import com.example.rijsmuseum.fragments.DetailsFragment
 import com.example.rijsmuseum.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         supportFragmentManager.beginTransaction().apply {
             //Opens the fragment FrameLayout window
             flFragment.visibility = View.VISIBLE
-            replace(R.id.flFragmentDetails, CollectionsDetailsFragment())
+            replace(R.id.flFragmentDetails, DetailsFragment())
             commit()
         }
     }
