@@ -4,13 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
+import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-    private val list: MutableList<Collections.ArtObject> = mutableListOf()
+    //Collections ArtObjects MutableList
+    private val cList: MutableList<Collections.ArtObject> = mutableListOf()
+    //CollectionsDetails ArtObjects
+    //unused yet
+    private val cDetailsObject: MutableLiveData<CollectionsDetails.ArtObject>? = null
 
     private var mListener: OnItemClickListener? = null
 
@@ -27,11 +33,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(cList[position])
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return cList.size
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -54,9 +60,13 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         }
     }
 
-    fun updateData(listItems: List<Collections.ArtObject>) {
-        list.clear()
-        list.addAll(listItems)
+    fun updateCollectionsData(listItems: List<Collections.ArtObject>) {
+        cList.clear()
+        cList.addAll(listItems)
         notifyDataSetChanged()
+    }
+
+    fun updateCollectionsDetailsData(item: CollectionsDetails.ArtObject) {
+        item.title
     }
 }
