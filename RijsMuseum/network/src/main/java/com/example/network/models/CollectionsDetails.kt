@@ -2,7 +2,7 @@ package com.example.network.models
 
 data class CollectionsDetails(
     val elapsedMilliseconds: Int,
-    val artObject: List<ArtObject>
+    val artObject: ArtObject
 ) {
 
     data class ArtObject(
@@ -53,7 +53,7 @@ data class CollectionsDetails(
         val inscriptions: List<String> = emptyList(),
         val documentation: List<String> = emptyList(),
         val catRefRPK: List<String> = emptyList(),
-        val principalOrFirstMaker: String?,
+        val principalOrFirstMaker: String,
         val dimensions: List<Dimensions>,
 
         val physicalProperties: List<String> = emptyList(),
