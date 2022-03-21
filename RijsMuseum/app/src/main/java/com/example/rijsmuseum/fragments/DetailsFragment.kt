@@ -1,6 +1,7 @@
 package com.example.rijsmuseum.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,15 +33,14 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleText = view.findViewById(R.id.fragmentTitle)
-        val bundle = Bundle()
+        requireArguments().getString("objectNumber")?.let {
+            Log.d("Bundle", "Object number is: $it")
+            detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
+                override fun onDataReady(data: CollectionsDetails.ArtObject) {
+                    titleText.text = data.title
+                }
 
-        detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
-            override fun onDataReady(data: CollectionsDetails.ArtObject) {
-                titleText.text = data.title
-                //Getting string value from Bundle
-                bundle.getString("objectNumber")
-            }
-
-        })
+            }, it)
+        } ?: Log.e("Error", "Object number is null")
     }
 }
