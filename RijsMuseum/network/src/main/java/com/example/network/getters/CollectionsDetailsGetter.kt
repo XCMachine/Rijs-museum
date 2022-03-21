@@ -11,12 +11,13 @@ import retrofit2.Response
 class CollectionsDetailsGetter {
 
     fun getCollectionsDetailsRequest(
-        callback: DataReadyCallback
+        callback: DataReadyCallback,
+        objectNumber: String
     ) {
         val collectionsDetailsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //CollectionsDetails model call and callback
-        val callCollections: Call<CollectionsDetails> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", objectNumber = "SK-C-5", format = "json")
+        val callCollections: Call<CollectionsDetails> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", format = "json", objectNumber = objectNumber)
         callCollections.enqueue(object : Callback<CollectionsDetails> {
             override fun onResponse(
                 call: Call<CollectionsDetails>,
