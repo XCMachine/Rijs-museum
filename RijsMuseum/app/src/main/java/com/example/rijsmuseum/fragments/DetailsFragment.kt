@@ -32,10 +32,13 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleText = view.findViewById(R.id.fragmentTitle)
+        val bundle = Bundle()
 
         detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
             override fun onDataReady(data: CollectionsDetails.ArtObject) {
                 titleText.text = data.title
+                //Getting string value from Bundle
+                bundle.getString("objectNumber")
             }
 
         })
