@@ -54,12 +54,15 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     override fun onItemClick(cDetailsArtObject: Collections.ArtObject) {
         supportFragmentManager.beginTransaction().apply {
-            //Bundle
+            //Bundle and Intent
             val bundle = Bundle()
             bundle.putString("objectNumber", cDetailsArtObject.objectNumber)
+            val detailsFrag = DetailsFragment()
+            detailsFrag.arguments = bundle
+
             //Opens the fragment FrameLayout window
             flFragment.visibility = View.VISIBLE
-            replace(R.id.flFragmentDetails, DetailsFragment())
+            replace(R.id.flFragmentDetails, detailsFrag)
             commit()
         }
     }
