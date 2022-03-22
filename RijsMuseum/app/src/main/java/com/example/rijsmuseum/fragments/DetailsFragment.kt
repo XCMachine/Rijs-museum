@@ -1,21 +1,22 @@
 package com.example.rijsmuseum.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.network.getters.CollectionsDetailsGetter
-import com.example.network.models.CollectionsDetails
+import com.example.rijsmuseum.MainActivity.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.R
+import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
 
 class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
-    private lateinit var titleText: TextView
     private lateinit var detailsViewModel: DetailsViewModel
+
+    private lateinit var _binding: FragmentCollectionDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +27,21 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_collection_details, container, false)
+    ): View? {
+        _binding = FragmentCollectionDetailsBinding.inflate(inflater, container, false)
+        return _binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleText = view.findViewById(R.id.fragmentTitle)
-
-        detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
-            override fun onDataReady(data: CollectionsDetails.ArtObject) {
-                titleText.text = data.title
+        requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
+            Log.d("Bundle", "Object number is: $argumentString")
+            detailsViewModel.cList.observe(viewLifecycleOwner) {
+                _binding.fragmentTitle.text = it.title
             }
 
-        })
+            detailsViewModel.getCollectionsDetailsRequest(argumentString)
+        } ?: Log.e("Error", "Object number is null")
     }
 }
