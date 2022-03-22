@@ -1,13 +1,14 @@
 package com.example.rijsmuseum.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.network.getters.CollectionsDetailsGetter
 import com.example.network.models.CollectionsDetails
 
 class DetailsViewModel: ViewModel() {
-    var _dataTitle = MutableLiveData<String>()
-    val _cList = MutableLiveData<CollectionsDetails.ArtObject>()
+    private val _cList = MutableLiveData<CollectionsDetails.ArtObject>()
+    val cList: LiveData<CollectionsDetails.ArtObject> = _cList
 
     fun getCollectionsDetailsRequest(
         objectNumber: String
@@ -16,7 +17,6 @@ class DetailsViewModel: ViewModel() {
             object : CollectionsDetailsGetter.DataReadyCallback {
                 override fun onDataReady(data: CollectionsDetails.ArtObject) {
                     _cList.value = data
-                    _dataTitle.value = _cList.value?.title
                 }
             }, objectNumber)
     }
