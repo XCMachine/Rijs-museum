@@ -12,7 +12,6 @@ import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.fragments.DetailsFragment
-import com.example.rijsmuseum.viewmodel.DetailsViewModel
 import com.example.rijsmuseum.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
@@ -21,17 +20,14 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     private lateinit var flFragment: FrameLayout
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var detailsViewModel: DetailsViewModel
 
     private lateinit var adapter: RecyclerAdapter
-    private val bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
         recyclerView = findViewById(R.id.recyclerView)
         flFragment = findViewById(R.id.flFragmentDetails)
@@ -58,15 +54,21 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     override fun onItemClick(cList: Collections.ArtObject) {
         supportFragmentManager.beginTransaction().apply {
-            val detailsFragment = DetailsFragment()
-            detailsFragment.arguments = bundle
 
-            detailsViewModel.setBundleString(bundle, detailsFragment, cList)
+            val detailsFragment = DetailsFragment().also {
+                val bundle = Bundle()
+                bundle.putString(TEXT_KEY_OBJECT_NUMBER, cList.objectNumber)
+                it.arguments = bundle
+            }
 
             //Opens the fragment FrameLayout window
             flFragment.visibility = View.VISIBLE
             replace(R.id.flFragmentDetails, detailsFragment)
             commit()
         }
+    }
+
+    companion object {
+        private const val TEXT_KEY_OBJECT_NUMBER = "objectNumber"
     }
 }
