@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.network.getters.CollectionsDetailsGetter
-import com.example.network.models.CollectionsDetails
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
@@ -33,14 +31,17 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleText = view.findViewById(R.id.fragmentTitle)
-        requireArguments().getString("objectNumber")?.let {
-            Log.d("Bundle", "Object number is: $it")
-            detailsViewModel.getCollectionsDetailsRequest(object : CollectionsDetailsGetter.DataReadyCallback {
-                override fun onDataReady(data: CollectionsDetails.ArtObject) {
-                    titleText.text = data.title
-                }
+        requireArguments().getString(TEXT_KEY_OBJECT_NUMBER)?.let { argumentString ->
+            Log.d("Bundle", "Object number is: $argumentString")
+            detailsViewModel._dataTitle.observe(viewLifecycleOwner) { newString ->
+                titleText.text = newString
+            }
 
-            }, it)
+            detailsViewModel.getCollectionsDetailsRequest(argumentString)
         } ?: Log.e("Error", "Object number is null")
+    }
+
+    companion object {
+        private const val TEXT_KEY_OBJECT_NUMBER = "objectNumber"
     }
 }
