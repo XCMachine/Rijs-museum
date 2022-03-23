@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
-import com.example.rijsmuseum.MainActivity
 import com.example.rijsmuseum.R
+import com.example.rijsmuseum.fragments.ArtifactFragment
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
@@ -19,7 +19,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     interface OnItemClickListener {
         fun onItemClick(cList: Collections.ArtObject)
     }
-    fun setOnItemClickListener(listener: MainActivity) {
+    fun setOnItemClickListener(listener: ArtifactFragment) {
         mListener = listener
     }
 
