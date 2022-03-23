@@ -12,7 +12,7 @@
         android:id="@+id/getButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#37BF8F"
+        android:backgroundTint="@color/green"
         android:text="@string/press"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
