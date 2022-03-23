@@ -7,18 +7,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.models.Collections
 import com.example.rijsmuseum.R
-import com.example.rijsmuseum.fragments.ArtifactFragment
+import com.example.rijsmuseum.fragments.ArtifactsFragment
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
     private val cList: MutableList<Collections.ArtObject> = mutableListOf()
 
-    private var mListener: OnItemClickListener? = null
+    private var mListener: OnItemCallback? = null
 
-    interface OnItemClickListener {
+    interface OnItemCallback {
         fun onItemClick(cList: Collections.ArtObject)
     }
-    fun setOnItemClickListener(listener: ArtifactFragment) {
+    fun setOnItemClickListener(listener: ArtifactsFragment) {
         mListener = listener
     }
 
