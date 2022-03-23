@@ -12,7 +12,7 @@ import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
 
-class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
+class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemCallback {
     private lateinit var artifactsViewModel: ArtifactsViewModel
     private lateinit var binding: FragmentArtifactBinding
 
