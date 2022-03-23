@@ -12,7 +12,7 @@ import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
 
-class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemCallback {
+class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
     private lateinit var artifactsViewModel: ArtifactsViewModel
     private lateinit var binding: FragmentArtifactBinding
 
@@ -45,7 +45,6 @@ class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemCallback {
     private fun getAdapter() {
         adapter = RecyclerAdapter()
         binding.recyclerView.adapter = adapter
-        adapter.setOnItemClickListener(this)
     }
 
     override fun onItemClick(cList: Collections.ArtObject) {
@@ -56,7 +55,6 @@ class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemCallback {
                 detailsFragment.arguments = bundle
             }
             replace(R.id.fragmentContainerView, detailsFragment)
-            addToBackStack(ArtifactsFragment::class.java.name)
             commit()
         }
     }
