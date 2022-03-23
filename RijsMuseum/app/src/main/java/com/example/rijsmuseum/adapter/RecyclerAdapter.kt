@@ -12,7 +12,6 @@ import com.example.rijsmuseum.fragments.ArtifactFragment
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
     private val cList: MutableList<Collections.ArtObject> = mutableListOf()
-    //private val cDetailsArtObject: CollectionsDetails.ArtObject? = null
 
     private var mListener: OnItemClickListener? = null
 
