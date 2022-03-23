@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.network.getters.CollectionsGetter
 import com.example.network.models.Collections
 
-class ArtifactViewModel: ViewModel() {
+class ArtifactsViewModel: ViewModel() {
     private val _cList = MutableLiveData<List<Collections.ArtObject>>()
     val cList: LiveData<List<Collections.ArtObject>> = _cList
 

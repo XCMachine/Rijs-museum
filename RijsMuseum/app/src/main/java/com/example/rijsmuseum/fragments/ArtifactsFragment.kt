@@ -10,17 +10,17 @@ import com.example.network.models.Collections
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
-import com.example.rijsmuseum.viewmodel.ArtifactViewModel
+import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
 
-class ArtifactFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
-    private lateinit var artifactViewModel: ArtifactViewModel
+class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
+    private lateinit var artifactsViewModel: ArtifactsViewModel
     private lateinit var binding: FragmentArtifactBinding
 
     private lateinit var adapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        artifactViewModel = ViewModelProvider(this).get(ArtifactViewModel::class.java)
+        artifactsViewModel = ViewModelProvider(this).get(ArtifactsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -36,10 +36,10 @@ class ArtifactFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         getAdapter()
 
-        artifactViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
+        artifactsViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
             adapter.updateCollectionsData(listArtObjects)
         }
-        artifactViewModel.getCollectionsRequest()
+        artifactsViewModel.getCollectionsRequest()
     }
 
     private fun getAdapter() {
@@ -56,7 +56,7 @@ class ArtifactFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 detailsFragment.arguments = bundle
             }
             replace(R.id.fragmentContainerView, detailsFragment)
-            addToBackStack(ArtifactFragment::class.java.name)
+            addToBackStack(ArtifactsFragment::class.java.name)
             commit()
         }
     }
