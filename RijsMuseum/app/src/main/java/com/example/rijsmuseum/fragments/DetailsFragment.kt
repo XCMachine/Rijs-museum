@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.rijsmuseum.MainActivity.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
+import com.example.rijsmuseum.fragments.ArtifactFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
 
