@@ -27,7 +27,7 @@ data class CollectionsDetails(
         //labelText = null
         val objectTypes: List<String> = emptyList(),
         val objectCollection: List<String> = emptyList(),
-        val makers: List<String> = emptyList(),
+        val makers: List<Makers>,
 
         val principalMakers: List<PrincipalMakers>,
 
@@ -97,6 +97,15 @@ data class CollectionsDetails(
         data class Normal32Colors(
             val percentage: Int,
             val hex: String
+        )
+
+        data class Makers(
+            val name:String,
+            val unFixedName: String,
+            val occupation: List<String> = emptyList(),
+            val roles: List<String>,
+            val productionPlaces: List<String>,
+            val labelDesc: String
         )
 
         data class PrincipalMakers(
