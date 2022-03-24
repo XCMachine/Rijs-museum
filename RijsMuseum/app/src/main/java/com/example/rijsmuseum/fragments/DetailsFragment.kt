@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.rijsmuseum.MainActivity.Companion.OBJECT_NUMBER
+import com.bumptech.glide.Glide
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
+import com.example.rijsmuseum.fragments.ArtefactsFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
-
 
 class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     private lateinit var detailsViewModel: DetailsViewModel
 
-    private lateinit var _binding: FragmentCollectionDetailsBinding
+    private lateinit var binding: FragmentCollectionDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +27,9 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentCollectionDetailsBinding.inflate(inflater, container, false)
-        return _binding.root
+    ): View {
+        binding = FragmentCollectionDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
@@ -37,8 +37,12 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
         super.onViewCreated(view, savedInstanceState)
         requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
             Log.d("Bundle", "Object number is: $argumentString")
-            detailsViewModel.cList.observe(viewLifecycleOwner) {
-                _binding.fragmentTitle.text = it.title
+            detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
+                binding.fragmentTitle.text = it.title
+
+                Glide.with(requireActivity())
+                    .load(it.webImage.url)
+                    .into(binding.imageView)
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
