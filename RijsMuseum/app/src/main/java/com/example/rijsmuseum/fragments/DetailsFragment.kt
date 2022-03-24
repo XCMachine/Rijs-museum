@@ -40,11 +40,9 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
                 binding.fragmentTitle.text = it.title
 
-                activity?.let { getActivity ->
-                    Glide.with(getActivity)
-                        .load(it.webImage.url)
-                        .into(binding.imageView)
-                }
+                Glide.with(requireActivity())
+                    .load(it.webImage.url)
+                    .into(binding.imageView)
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
