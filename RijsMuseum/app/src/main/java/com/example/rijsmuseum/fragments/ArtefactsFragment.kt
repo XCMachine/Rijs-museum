@@ -12,7 +12,7 @@ import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
 
-class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
+class ArtefactsFragment : Fragment() {
     private lateinit var artifactsViewModel: ArtifactsViewModel
     private lateinit var binding: FragmentArtifactBinding
 
@@ -44,19 +44,21 @@ class ArtifactsFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     private fun getAdapter() {
         adapter = RecyclerAdapter()
-        binding.recyclerView.adapter = adapter
-    }
-
-    override fun onItemClick(cList: Collections.ArtObject) {
-        requireActivity().supportFragmentManager.beginTransaction().apply {
-            val detailsFragment = DetailsFragment().also { detailsFragment ->
-                val bundle = Bundle()
-                bundle.putString(OBJECT_NUMBER, cList.objectNumber)
-                detailsFragment.arguments = bundle
+        adapter.setOnItemClickListener(object : RecyclerAdapter.OnClickCallback {
+            override fun onItemClick(cList: Collections.ArtObject) {
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    val detailsFragment = DetailsFragment().also { detailsFragment ->
+                        val bundle = Bundle()
+                        bundle.putString(OBJECT_NUMBER, cList.objectNumber)
+                        detailsFragment.arguments = bundle
+                    }
+                    replace(R.id.fragmentContainerView, detailsFragment)
+                    addToBackStack(DetailsFragment::class.java.name)
+                    commit()
+                }
             }
-            replace(R.id.fragmentContainerView, detailsFragment)
-            commit()
-        }
+        })
+        binding.recyclerView.adapter = adapter
     }
 
     companion object {
