@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
 import com.example.rijsmuseum.fragments.ArtefactsFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
-
 
 class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
     private lateinit var detailsViewModel: DetailsViewModel
@@ -39,6 +39,12 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
             Log.d("Bundle", "Object number is: $argumentString")
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
                 binding.fragmentTitle.text = it.title
+
+                activity?.let { getActivity ->
+                    Glide.with(getActivity)
+                        .load(it.webImage.url)
+                        .into(binding.imageView)
+                }
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
