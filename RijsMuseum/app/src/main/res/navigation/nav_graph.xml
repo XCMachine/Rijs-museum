@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/artefactsFragment">
+    app:startDestination="@id/artifactsFragment">
+
     <fragment
-        android:id="@+id/artefactsFragment"
-        android:name="com.example.rijsmuseum.fragments.ArtefactsFragment"
+        android:id="@+id/artifactsFragment"
+        android:name="com.example.rijsmuseum.fragments.ArtifactsFragment"
         android:label="fragment_artifact"
         tools:layout="@layout/fragment_artifact" >
         <action
-            android:id="@+id/action_artefactsFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            android:id="@+id/action_artifactsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
