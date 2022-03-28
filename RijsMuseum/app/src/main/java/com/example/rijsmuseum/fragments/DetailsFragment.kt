@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
-import com.example.rijsmuseum.fragments.ArtefactsFragment.Companion.OBJECT_NUMBER
+import com.example.rijsmuseum.fragments.ArtifactsFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
 class DetailsFragment : Fragment(R.layout.fragment_collection_details) {

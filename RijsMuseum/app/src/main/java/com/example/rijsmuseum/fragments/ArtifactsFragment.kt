@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.network.models.Collections
-import com.example.rijsmuseum.R
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
 
-class ArtefactsFragment : Fragment() {
+class ArtifactsFragment : Fragment() {
     private lateinit var artifactsViewModel: ArtifactsViewModel
     private lateinit var binding: FragmentArtifactBinding
 
@@ -47,14 +48,9 @@ class ArtefactsFragment : Fragment() {
         adapter.setOnItemClickListener(object : RecyclerAdapter.OnClickCallback {
             override fun onItemClick(cList: Collections.ArtObject) {
                 requireActivity().supportFragmentManager.beginTransaction().apply {
-                    val detailsFragment = DetailsFragment().also { detailsFragment ->
-                        val bundle = Bundle()
-                        bundle.putString(OBJECT_NUMBER, cList.objectNumber)
-                        detailsFragment.arguments = bundle
-                    }
-                    replace(R.id.fragmentContainerView, detailsFragment)
-                    addToBackStack(DetailsFragment::class.java.name)
-                    commit()
+                    val bundle = bundleOf(OBJECT_NUMBER to cList.objectNumber)
+                    val action = ArtifactsFragmentDirections.actionArtifactsFragmentToDetailsFragment()
+                    findNavController().navigate(action.actionId, bundle)
                 }
             }
         })
