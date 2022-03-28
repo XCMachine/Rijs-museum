@@ -47,11 +47,9 @@ class ArtifactsFragment : Fragment() {
         adapter = RecyclerAdapter()
         adapter.setOnItemClickListener(object : RecyclerAdapter.OnClickCallback {
             override fun onItemClick(cList: Collections.ArtObject) {
-                requireActivity().supportFragmentManager.beginTransaction().apply {
-                    val bundle = bundleOf(OBJECT_NUMBER to cList.objectNumber)
-                    val action = ArtifactsFragmentDirections.actionArtifactsFragmentToDetailsFragment()
-                    findNavController().navigate(action.actionId, bundle)
-                }
+                val bundle = bundleOf(OBJECT_NUMBER to cList.objectNumber)
+                val action = ArtifactsFragmentDirections.actionArtifactsFragmentToDetailsFragment()
+                findNavController().navigate(action.actionId, bundle)
             }
         })
         binding.recyclerView.adapter = adapter
