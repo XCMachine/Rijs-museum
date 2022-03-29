@@ -38,11 +38,13 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
         requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
             Log.d("Bundle", "Object number is: $argumentString")
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
-                binding.fragmentTitle.text = it.title
+                binding.collapsingToolbarLayout.title = it.title
 
                 Glide.with(requireActivity())
                     .load(it.webImage.url)
                     .into(binding.imageView)
+
+                binding.artDetailsDescription.text = it.description
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
