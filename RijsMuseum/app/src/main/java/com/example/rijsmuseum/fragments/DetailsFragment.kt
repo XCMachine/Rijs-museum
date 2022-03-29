@@ -44,7 +44,7 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
                     .load(it.webImage.url)
                     .into(binding.imageView)
 
-                binding.fragmentDescription.text = it.description
+                binding.artDetailsDescription.text = it.description
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
