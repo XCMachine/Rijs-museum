@@ -3,12 +3,14 @@ package com.example.rijsmuseum.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.network.models.Collections
 import com.example.rijsmuseum.R
 
-class RecyclerAdapter() : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
     private val cList: MutableList<Collections.ArtObject> = mutableListOf()
 
@@ -36,9 +38,15 @@ class RecyclerAdapter() : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private var titleText: TextView = itemView.findViewById(R.id.titleText)
+        private var imageView: ImageView = itemView.findViewById(R.id.imageView)
 
         fun bind(data: Collections.ArtObject) {
             titleText.text = data.title
+
+            Glide.with(itemView)
+                .load(data.webImage.url)
+                .circleCrop()
+                .into(imageView)
         }
 
         init {
