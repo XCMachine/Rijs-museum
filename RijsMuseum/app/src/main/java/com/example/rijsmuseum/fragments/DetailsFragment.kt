@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
+import com.example.rijsmuseum.fragments.ArtifactsFragment.Companion.LOG_TAG
+
+
 import com.example.rijsmuseum.fragments.ArtifactsFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
@@ -35,6 +38,17 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getObserveData()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
+            getObserveData()
+
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun getObserveData() {
         requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
             Log.d("Bundle", "Object number is: $argumentString")
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
