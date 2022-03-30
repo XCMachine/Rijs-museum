@@ -1,6 +1,7 @@
 package com.example.rijsmuseum.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,16 @@ class ArtifactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getAdapter()
+        getObserveData()
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Log.i(LOG_TAG, "onRefreshed called from SwipeRefreshLayout")
+            getObserveData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun getObserveData() {
         artifactsViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
             adapter.updateCollectionsData(listArtObjects)
         }
@@ -57,5 +67,6 @@ class ArtifactsFragment : Fragment() {
 
     companion object {
         const val OBJECT_NUMBER = "objectNumber"
+        const val LOG_TAG = "SwipeRefresh"
     }
 }
