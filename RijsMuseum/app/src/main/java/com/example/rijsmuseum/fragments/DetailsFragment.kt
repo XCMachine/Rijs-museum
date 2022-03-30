@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.rijsmuseum.R
 import com.example.rijsmuseum.databinding.FragmentCollectionDetailsBinding
+import com.example.rijsmuseum.fragments.ArtifactsFragment.Companion.LOG_TAG
+
+
 import com.example.rijsmuseum.fragments.ArtifactsFragment.Companion.OBJECT_NUMBER
 import com.example.rijsmuseum.viewmodel.DetailsViewModel
 
@@ -35,8 +38,20 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeData()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
+            requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
+                detailsViewModel.getCollectionsDetailsRequest(argumentString)
+            }
+        }
+    }
+
+    private fun observeData() {
         requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
             Log.d("Bundle", "Object number is: $argumentString")
+
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
                 binding.collapsingToolbarLayout.title = it.title
 
@@ -45,6 +60,7 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
                     .into(binding.imageView)
 
                 binding.artDetailsDescription.text = it.description
+                binding.swipeRefreshLayout.isRefreshing = false
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)
