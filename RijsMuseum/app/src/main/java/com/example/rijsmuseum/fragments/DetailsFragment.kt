@@ -38,19 +38,20 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getObserveData()
+        observeData()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout")
-            getObserveData()
-
-            binding.swipeRefreshLayout.isRefreshing = false
+            requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
+                detailsViewModel.getCollectionsDetailsRequest(argumentString)
+            }
         }
     }
 
-    private fun getObserveData() {
+    private fun observeData() {
         requireArguments().getString(OBJECT_NUMBER)?.let { argumentString ->
             Log.d("Bundle", "Object number is: $argumentString")
+
             detailsViewModel.cDetailsList.observe(viewLifecycleOwner) {
                 binding.collapsingToolbarLayout.title = it.title
 
@@ -59,6 +60,7 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
                     .into(binding.imageView)
 
                 binding.artDetailsDescription.text = it.description
+                binding.swipeRefreshLayout.isRefreshing = false
             }
 
             detailsViewModel.getCollectionsDetailsRequest(argumentString)

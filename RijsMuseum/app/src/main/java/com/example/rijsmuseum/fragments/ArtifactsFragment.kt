@@ -36,20 +36,22 @@ class ArtifactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeData()
         getAdapter()
-        getObserveData()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             Log.i(LOG_TAG, "onRefreshed called from SwipeRefreshLayout")
-            getObserveData()
-            binding.swipeRefreshLayout.isRefreshing = false
+            artifactsViewModel.getCollectionsRequest()
         }
     }
 
-    private fun getObserveData() {
+    private fun observeData() {
         artifactsViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
+            Log.i(LOG_TAG, "Refreshing False")
             adapter.updateCollectionsData(listArtObjects)
+            binding.swipeRefreshLayout.isRefreshing = false
         }
+
         artifactsViewModel.getCollectionsRequest()
     }
 
