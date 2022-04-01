@@ -1,9 +1,9 @@
-package com.example.network.getters
+package com.example.network.resource.getters
 
 import android.util.Log
 import com.example.network.Retrofit
 import com.example.network.api.CollectionsApiService
-import com.example.network.models.CollectionsDetails
+import com.example.network.resource.models.CollectionsDetailsResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,18 +17,18 @@ class CollectionsDetailsGetter {
         val collectionsDetailsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //CollectionsDetails model call and callback
-        val callCollections: Call<CollectionsDetails> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", format = "json", objectNumber = objectNumber)
-        callCollections.enqueue(object : Callback<CollectionsDetails> {
+        val callCollectionsDetails: Call<CollectionsDetailsResource> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", format = "json", objectNumber = objectNumber)
+        callCollectionsDetails.enqueue(object : Callback<CollectionsDetailsResource> {
             override fun onResponse(
-                call: Call<CollectionsDetails>,
-                response: Response<CollectionsDetails>
+                call: Call<CollectionsDetailsResource>,
+                response: Response<CollectionsDetailsResource>
             ) {
                 response.body()?.run {
                     callback.onDataReady(this.artObject)
                 }
             }
 
-            override fun onFailure(call: Call<CollectionsDetails>, t: Throwable) {
+            override fun onFailure(call: Call<CollectionsDetailsResource>, t: Throwable) {
                 Log.e("Error", t.localizedMessage!!)
             }
 
@@ -36,6 +36,6 @@ class CollectionsDetailsGetter {
     }
 
     interface DataReadyCallback {
-        fun onDataReady(data: CollectionsDetails.ArtObject)
+        fun onDataReady(data: CollectionsDetailsResource.ArtObjectResource)
     }
 }

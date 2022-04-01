@@ -1,12 +1,12 @@
-package com.example.network.models
+package com.example.network.resource.models
 
-data class CollectionsDetails(
+data class CollectionsDetailsResource(
     val elapsedMilliseconds: Int,
-    val artObject: ArtObject
+    val artObject: ArtObjectResource
 ) {
 
-    data class ArtObject(
-        val links: Links,
+    data class ArtObjectResource(
+        val links: LinksResource,
 
         val id: String,
         val priref: String,
@@ -15,21 +15,21 @@ data class CollectionsDetails(
         val title: String,
         //copyrightHolder = null
 
-        val webImage: WebImage,
+        val webImage: WebImageResource,
 
-        val colors: List<Colors>,
-        val colorsWithNormalization: List<ColorsWithNormal>,
-        val normalizedColors: List<NormalColors>,
-        val normalized32Colors: List<Normal32Colors>,
+        val colors: List<ColorsResource>,
+        val colorsWithNormalization: List<ColorsWithNormalResource>,
+        val normalizedColors: List<NormalColorsResource>,
+        val normalized32Color: List<Normal32ColorsResource>,
 
         val titles: List<String>,
         val description: String,
         //labelText = null
         val objectTypes: List<String> = emptyList(),
         val objectCollection: List<String> = emptyList(),
-        val makers: List<Makers>,
+        val makers: List<MakersResource>,
 
-        val principalMakers: List<PrincipalMakers>,
+        val principalMakers: List<PrincipalMakersResource>,
 
         val plaqueDescriptionDutch: String,
         val plaqueDescriptionEnglish: String,
@@ -37,16 +37,16 @@ data class CollectionsDetails(
         //artistRole = null
         val associations: List<String> = emptyList(),
 
-        val acquisition: Acquisition,
+        val acquisition: AcquisitionResource,
 
         val exhibitions: List<String> = emptyList(),
         val materials: List<String> = emptyList(),
         val techniques: List<String> = emptyList(),
         val productionPlaces: List<String> = emptyList(),
 
-        val dating: Dating,
+        val dating: DatingResource,
 
-        val classification: Classification,
+        val classification: ClassificationResource,
 
         val hasImage: Boolean,
         val historicalPersons: List<String> = emptyList(),
@@ -54,23 +54,23 @@ data class CollectionsDetails(
         val documentation: List<String> = emptyList(),
         val catRefRPK: List<String> = emptyList(),
         val principalOrFirstMaker: String,
-        val dimensions: List<Dimensions>,
+        val dimensions: List<DimensionsResource>,
 
         val physicalProperties: List<String> = emptyList(),
         val physicalMedium: String,
         val longTitle: String,
         val subTitle: String,
         val scLabelLine: String,
-        val label: Label,
+        val label: LabelResource,
 
         val showImage: Boolean,
         val location: String
     ) {
-        data class Links(
+        data class LinksResource(
             val search: String
         )
 
-        data class WebImage(
+        data class WebImageResource(
             val guid: String,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
@@ -79,27 +79,27 @@ data class CollectionsDetails(
             val url: String
         )
 
-        data class Colors(
+        data class ColorsResource(
             val percentage: Int,
             val hex: String
         )
 
-        data class ColorsWithNormal(
+        data class ColorsWithNormalResource(
             val originalHex: String,
             val normalizeHex: String
         )
 
-        data class NormalColors(
+        data class NormalColorsResource(
             val percentage: Int,
             val hex: String
         )
 
-        data class Normal32Colors(
+        data class Normal32ColorsResource(
             val percentage: Int,
             val hex: String
         )
 
-        data class Makers(
+        data class MakersResource(
             val name:String,
             val unFixedName: String,
             val occupation: List<String> = emptyList(),
@@ -108,7 +108,7 @@ data class CollectionsDetails(
             val labelDesc: String
         )
 
-        data class PrincipalMakers(
+        data class PrincipalMakersResource(
             val name: String,
             val unFixedName: String,
             val placeOfBirth: String,
@@ -125,13 +125,13 @@ data class CollectionsDetails(
             //qualification = null
         )
 
-        data class Acquisition(
+        data class AcquisitionResource(
             val method: String,
             val date: String,
             val creditLine: String
         )
 
-        data class Dating(
+        data class DatingResource(
             val presentingDate: String,
             val sortingDate: Int,
             val period: Int,
@@ -139,18 +139,18 @@ data class CollectionsDetails(
             val yearLate: Int
         )
 
-        data class Classification(
+        data class ClassificationResource(
             val iconClassIdentifier: List<String> = emptyList()
         )
 
-        data class Dimensions(
+        data class DimensionsResource(
             val unit: String,
             val type: String,
             //part = null,
             val value: String
         )
 
-        data class Label(
+        data class LabelResource(
             val title: String,
             val makerLine: String,
             val description: String,

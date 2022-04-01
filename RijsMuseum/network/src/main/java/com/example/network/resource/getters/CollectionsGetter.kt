@@ -1,9 +1,9 @@
-package com.example.network.getters
+package com.example.network.resource.getters
 
 import android.util.Log
 import com.example.network.Retrofit
 import com.example.network.api.CollectionsApiService
-import com.example.network.models.Collections
+import com.example.network.resource.models.CollectionsResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,24 +16,24 @@ class CollectionsGetter {
         val collectionsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //Collections model call and callback
-        val callCollections: Call<Collections> = collectionsApi.getCollectionsList(culture = "en", page = "0", pages = "10")
-        callCollections.enqueue(object : Callback<Collections> {
+        val callCollections: Call<CollectionsResource> = collectionsApi.getCollectionsList(culture = "en", page = "0", pages = "10")
+        callCollections.enqueue(object : Callback<CollectionsResource> {
             override fun onResponse(
-                call: Call<Collections>,
-                response: Response<Collections>
+                call: Call<CollectionsResource>,
+                response: Response<CollectionsResource>
             ) {
                 response.body()?.run {
                     callback.onDataReady(this.artObjects)
                 }
             }
 
-            override fun onFailure(call: Call<Collections>, t: Throwable) {
+            override fun onFailure(call: Call<CollectionsResource>, t: Throwable) {
                 Log.e("Error", t.localizedMessage!!)
             }
         })
     }
 
     interface DataReadyCallback{
-        fun onDataReady(data: List<Collections.ArtObject>)
+        fun onDataReady(data: List<CollectionsResource.ArtObjectResource>)
     }
 }

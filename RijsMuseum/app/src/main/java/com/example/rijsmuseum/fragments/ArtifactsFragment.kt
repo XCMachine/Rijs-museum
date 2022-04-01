@@ -9,7 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.network.models.Collections
+import com.example.network.resource.models.CollectionsResource
 import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
@@ -58,7 +58,7 @@ class ArtifactsFragment : Fragment() {
     private fun getAdapter() {
         adapter = RecyclerAdapter()
         adapter.setOnItemClickListener(object : RecyclerAdapter.OnClickCallback {
-            override fun onItemClick(cList: Collections.ArtObject) {
+            override fun onItemClick(cList: CollectionsResource.ArtObjectResource) {
                 val bundle = bundleOf(OBJECT_NUMBER to cList.objectNumber)
                 val action = ArtifactsFragmentDirections.actionArtifactsFragmentToDetailsFragment()
                 findNavController().navigate(action.actionId, bundle)
