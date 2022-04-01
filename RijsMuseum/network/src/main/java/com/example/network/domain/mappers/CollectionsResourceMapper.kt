@@ -6,17 +6,15 @@ import com.example.network.resource.models.CollectionsResource
 
 class CollectionsResourceMapper : ResourceMapper<CollectionsResource, List<ListArtObject>> {
     override fun mapFromResource(resource: CollectionsResource): List<ListArtObject> {
-        return listOf(
+        return resource.artObjects.map { resArtObject ->
             ListArtObject(
-                //False because of the index element
-                title = resource.artObjects[0].title,
-                url = resource.artObjects[0].webImage.url
+                title = resArtObject.title,
+                url = resArtObject.webImage.url
             )
-        )
+        }
     }
 
-    fun fromResourceList(initial: List<CollectionsResource>): List<ListArtObject> {
-        //Same false from the upper comment
-        return mapFromResource(initial[0])
+    fun getResourceList(resource: CollectionsResource): List<ListArtObject> {
+        return mapFromResource(resource)
     }
 }

@@ -13,9 +13,7 @@ class CollectionsDetailsResourceMapper : ResourceMapper<CollectionsDetailsResour
         )
     }
 
-    fun fromResourceList(initial: List<CollectionsDetailsResource>): List<ArtObject> {
-        return initial.map {
-            mapFromResource(it)
-        }
+    fun getResourceObject(resource: CollectionsDetailsResource): ArtObject {
+        return mapFromResource(resource)
     }
 }
