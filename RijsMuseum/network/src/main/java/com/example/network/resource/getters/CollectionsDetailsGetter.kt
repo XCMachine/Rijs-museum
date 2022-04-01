@@ -17,7 +17,7 @@ class CollectionsDetailsGetter {
         val collectionsDetailsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
 
         //CollectionsDetails model call and callback
-        val callCollectionsDetails: Call<CollectionsDetailsResource> = collectionsDetailsApi.getCollectionsDetailsList(culture = "en", format = "json", objectNumber = objectNumber)
+        val callCollectionsDetails: Call<CollectionsDetailsResource> = collectionsDetailsApi.getCollectionsDetails(culture = "en", format = "json", objectNumber = objectNumber)
         callCollectionsDetails.enqueue(object : Callback<CollectionsDetailsResource> {
             override fun onResponse(
                 call: Call<CollectionsDetailsResource>,
