@@ -20,7 +20,7 @@ interface CollectionsApiService {
 
     //GEts the collections details api
     @GET("/api/{culture}/collection/{objectNumber}")
-    fun getCollectionsDetailsList(
+    fun getCollectionsDetails(
         @Path("culture") culture: String,
         @Path("objectNumber") objectNumber: String,
         @Query("format") format: String,
