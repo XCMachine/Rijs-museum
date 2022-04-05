@@ -1,7 +1,7 @@
 package com.example.network.api
 
-import com.example.network.models.Collections
-import com.example.network.models.CollectionsDetails
+import com.example.network.resource.models.CollectionsDetailsResource
+import com.example.network.resource.models.CollectionsResource
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,16 +16,16 @@ interface CollectionsApiService {
         @Query("p") page: String = "0",
         @Query("ps") pages: String = "10",
         @Query("key") key: String = KEY
-    ): Call<Collections>
+    ): Call<CollectionsResource>
 
     //GEts the collections details api
     @GET("/api/{culture}/collection/{objectNumber}")
-    fun getCollectionsDetailsList(
+    fun getCollectionsDetails(
         @Path("culture") culture: String,
         @Path("objectNumber") objectNumber: String,
         @Query("format") format: String,
         @Query("key") key: String = KEY
-    ): Call<CollectionsDetails>
+    ): Call<CollectionsDetailsResource>
 
     companion object {
         const val KEY = "Z8ZQgAb8"

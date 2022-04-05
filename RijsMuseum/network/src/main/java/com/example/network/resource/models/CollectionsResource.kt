@@ -1,15 +1,15 @@
-package com.example.network.models
+package com.example.network.resource.models
 
-data class Collections(
+data class CollectionsResource(
     val elapsedMilliseconds: Int,
     val count: Int,
-    val artObjects: List<ArtObject>
+    val artObjects: List<ArtObjectResource>
     ) {
-    data class ArtObject(
+    data class ArtObjectResource(
         /**
          * Attributes as variables
          */
-        val links: Links,
+        val links: LinksResource,
 
         val id: String,
         val objectNumber: String,
@@ -20,20 +20,17 @@ data class Collections(
         val showImage: Boolean,
         val permitDownload: Boolean,
 
-        val webImage: WebImage,
-        val headerImage: HeaderImage,
+        val webImage: WebImageResource,
+        val headerImage: HeaderImageResource,
 
         val productionPlaces: List<String> = emptyList()
     ) {
-        /**
-         * Classes
-         */
-        data class Links(
+        data class LinksResource(
             val self: String,
             val web: String
         )
 
-        data class WebImage(
+        data class WebImageResource(
             val guid: String,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
@@ -42,7 +39,7 @@ data class Collections(
             val url: String
         )
 
-        data class HeaderImage(
+        data class HeaderImageResource(
             val guid: String,
             val offsetPercentageX: Int,
             val offsetPercentageY: Int,
