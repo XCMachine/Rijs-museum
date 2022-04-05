@@ -56,7 +56,7 @@ class DetailsFragment : Fragment(R.layout.fragment_collection_details) {
                 binding.collapsingToolbarLayout.title = it.title
 
                 Glide.with(requireActivity())
-                    .load(it.webImage.url)
+                    .load(it.url)
                     .into(binding.imageView)
 
                 binding.artDetailsDescription.text = it.description

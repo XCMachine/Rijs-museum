@@ -23,7 +23,7 @@ class CollectionsGetter {
                 response: Response<CollectionsResource>
             ) {
                 response.body()?.run {
-                    callback.onDataReady(this.artObjects)
+                    callback.onDataReady(this)
                 }
             }
 
@@ -34,6 +34,6 @@ class CollectionsGetter {
     }
 
     interface DataReadyCallback{
-        fun onDataReady(data: List<CollectionsResource.ArtObjectResource>)
+        fun onDataReady(data: CollectionsResource)
     }
 }

@@ -7,17 +7,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.network.resource.models.CollectionsResource
 import com.example.rijsmuseum.R
+import com.example.rijsmuseum.domain.models.ListArtObject
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     //Collections ArtObjects MutableList
-    private val cList: MutableList<CollectionsResource.ArtObjectResource> = mutableListOf()
+    private val cList: MutableList<ListArtObject> = mutableListOf()
 
     private var mListener: OnClickCallback? = null
 
     interface OnClickCallback {
-        fun onItemClick(cList: CollectionsResource.ArtObjectResource)
+        fun onItemClick(cList: ListArtObject)
     }
     fun setOnItemClickListener(listener: OnClickCallback) {
         mListener = listener
@@ -40,11 +40,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         private var titleText: TextView = itemView.findViewById(R.id.titleText)
         private var imageView: ImageView = itemView.findViewById(R.id.imageView)
 
-        fun bind(data: CollectionsResource.ArtObjectResource) {
+        fun bind(data: ListArtObject) {
             titleText.text = data.title
 
             Glide.with(itemView)
-                .load(data.webImage.url)
+                .load(data.url)
                 .circleCrop()
                 .into(imageView)
         }
@@ -57,7 +57,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         }
     }
 
-    fun updateCollectionsData(listItems: List<CollectionsResource.ArtObjectResource>) {
+    fun updateCollectionsData(listItems: List<ListArtObject>) {
         cList.clear()
         cList.addAll(listItems)
         notifyDataSetChanged()
