@@ -1,4 +1,4 @@
-package com.example.network.domain.models
+package com.example.rijsmuseum.domain.models
 
 data class ArtObject(
     val title: String,
