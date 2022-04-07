@@ -3,10 +3,8 @@ package com.example.rijsmuseum.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.network.resource.getters.CollectionsDetailsGetter
-import com.example.network.resource.models.CollectionsDetailsResource
-import com.example.rijsmuseum.domain.mappers.mapFromResourceObject
 import com.example.rijsmuseum.domain.models.ArtObject
+import com.example.rijsmuseum.repositories.CollectionRepository
 
 class DetailsViewModel: ViewModel() {
     private val _cDetailsList = MutableLiveData<ArtObject>()
@@ -15,11 +13,9 @@ class DetailsViewModel: ViewModel() {
     fun getCollectionsDetailsRequest(
         objectNumber: String
     ) {
-        CollectionsDetailsGetter().getCollectionsDetailsRequest(
-            object : CollectionsDetailsGetter.DataReadyCallback {
-                override fun onDataReady(data: CollectionsDetailsResource) {
-                    _cDetailsList.value = data.mapFromResourceObject()
-                }
-            }, objectNumber)
+        CollectionRepository().getDataObject(
+            mutableLiveData = _cDetailsList,
+            objectNumber = objectNumber
+        )
     }
 }
