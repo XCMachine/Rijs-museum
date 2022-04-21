@@ -13,7 +13,7 @@ class DetailsViewModel: ViewModel() {
     fun getCollectionsDetailsRequest(
         objectNumber: String
     ) {
-        CollectionRepository().getDataObject(
+        CollectionRepository.getDataObject(
             mutableLiveData = _cDetailsList,
             objectNumber = objectNumber
         )

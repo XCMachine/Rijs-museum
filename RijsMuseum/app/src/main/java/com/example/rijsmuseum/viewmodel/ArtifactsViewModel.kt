@@ -11,6 +11,6 @@ class ArtifactsViewModel: ViewModel() {
     val cList: LiveData<List<ListArtObject>> = _cList
 
     fun getCollectionsRequest() {
-        CollectionRepository().getDataListObjects(_cList)
+        CollectionRepository.getDataListObjects(_cList)
     }
 }
