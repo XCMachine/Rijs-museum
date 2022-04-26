@@ -24,12 +24,13 @@ object CollectionRepository {
     //From Collections Resources Model to Domain Model, using Cache variable
     //It needs to return the cache variable to the others
     fun getDataListObjects(
-        mutableLiveData: MutableLiveData<List<ListArtObject>>
+        mutableLiveData: MutableLiveData<List<ListArtObject>>,
+        comparator: Comparator<ListArtObject>
     ) {
         //Checks if the there is any data within cache, if not to write it
         if (latestCollections != null) {
             latestCollections?.mapFromResourceListObject()?.run {
-                mutableLiveData.value = this
+                mutableLiveData.value = this.sortedWith(comparator)
             }
         } else {
             collectionsNetworkDataSource.getCollectionRequest(object :
@@ -37,7 +38,7 @@ object CollectionRepository {
                 override fun onDataReady(data: CollectionsResource) {
                     latestCollections = data
                     latestCollections?.mapFromResourceListObject()?.run {
-                        mutableLiveData.value = this
+                        mutableLiveData.value = this.sortedWith(comparator)
                     }
                 }
             })

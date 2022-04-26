@@ -48,7 +48,6 @@ class ArtifactsFragment : Fragment() {
     private fun observeData() {
         artifactsViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
             Log.i(LOG_TAG, "Refreshing False")
-            artifactsViewModel.sortListByDescending()
             adapter.updateCollectionsData(listArtObjects)
             binding.swipeRefreshLayout.isRefreshing = false
         }
