@@ -13,6 +13,7 @@ import com.example.rijsmuseum.adapter.RecyclerAdapter
 import com.example.rijsmuseum.databinding.FragmentArtifactBinding
 import com.example.rijsmuseum.domain.models.ListArtObject
 import com.example.rijsmuseum.viewmodel.ArtifactsViewModel
+import java.util.*
 
 class ArtifactsFragment : Fragment() {
     private lateinit var artifactsViewModel: ArtifactsViewModel
@@ -48,6 +49,11 @@ class ArtifactsFragment : Fragment() {
     private fun observeData() {
         artifactsViewModel.cList.observe(viewLifecycleOwner) { listArtObjects ->
             Log.i(LOG_TAG, "Refreshing False")
+
+            Collections.sort(listArtObjects) { listAO1, listAO2 ->
+                listAO2.title.compareTo(listAO1.title)
+            }
+
             adapter.updateCollectionsData(listArtObjects)
             binding.swipeRefreshLayout.isRefreshing = false
         }
@@ -70,5 +76,6 @@ class ArtifactsFragment : Fragment() {
     companion object {
         const val OBJECT_NUMBER = "objectNumber"
         const val LOG_TAG = "SwipeRefresh"
+        const val LOG_SORT = "CollectionsSort"
     }
 }
