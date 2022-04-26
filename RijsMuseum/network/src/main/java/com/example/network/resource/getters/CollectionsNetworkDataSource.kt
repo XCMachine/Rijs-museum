@@ -8,13 +8,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CollectionsGetter {
-
+class CollectionsNetworkDataSource(
+    private val collectionsApi: CollectionsApiService = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
+) {
     fun getCollectionRequest(
         callback: DataReadyCallback
     ) {
-        val collectionsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
-
         //Collections model call and callback
         val callCollections: Call<CollectionsResource> = collectionsApi.getCollectionsList(culture = "en", page = "0", pages = "10")
         callCollections.enqueue(object : Callback<CollectionsResource> {

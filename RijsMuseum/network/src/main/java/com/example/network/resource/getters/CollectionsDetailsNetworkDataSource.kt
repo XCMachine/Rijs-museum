@@ -8,14 +8,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CollectionsDetailsGetter {
-
+class CollectionsDetailsNetworkDataSource(
+    private val collectionsDetailsApi: CollectionsApiService = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
+) {
     fun getCollectionsDetailsRequest(
         callback: DataReadyCallback,
         objectNumber: String
     ) {
-        val collectionsDetailsApi = Retrofit().getCollectionsInstance().create(CollectionsApiService::class.java)
-
         //CollectionsDetails model call and callback
         val callCollectionsDetails: Call<CollectionsDetailsResource> = collectionsDetailsApi.getCollectionsDetails(culture = "en", format = "json", objectNumber = objectNumber)
         callCollectionsDetails.enqueue(object : Callback<CollectionsDetailsResource> {
