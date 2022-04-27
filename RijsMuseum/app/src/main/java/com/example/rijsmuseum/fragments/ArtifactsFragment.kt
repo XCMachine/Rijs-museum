@@ -51,7 +51,6 @@ class ArtifactsFragment : Fragment() {
             adapter.updateCollectionsData(listArtObjects)
             binding.swipeRefreshLayout.isRefreshing = false
         }
-
         artifactsViewModel.getCollectionsRequest()
     }
 
